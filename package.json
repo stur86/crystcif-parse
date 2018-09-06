@@ -1,0 +1,24 @@
+{
+  "name": "crystcif-parse",
+  "version": "0.1.0",
+  "description": "A parser for crystallographic CIF files",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stur86/crystcif-parse.git"
+  },
+  "keywords": [
+    "CIF",
+    "crystallography",
+    "parser"
+  ],
+  "author": "Simone Sturniolo <simonesturniolo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stur86/crystcif-parse/issues"
+  },
+  "homepage": "https://github.com/stur86/crystcif-parse#readme"
+}
