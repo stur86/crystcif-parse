@@ -23,14 +23,14 @@ describe('#tokens', function() {
     });
     it('should match (un)quoted strings', function() {
         var re = tokens.tokenRegex('squotestring');
-        var res = re.exec("'this' and that");
+        var res = re.exec("'this and' that");
         expect(res.index).to.equal(0);
-        expect(res[0]).to.equal("'this'");
+        expect(res[0]).to.equal("'this and'");
 
         var re = tokens.tokenRegex('dquotestring');
-        var res = re.exec('this and "that"');
-        expect(res.index).to.equal(9);
-        expect(res[0]).to.equal('"that"');
+        var res = re.exec('this "and that"');
+        expect(res.index).to.equal(5);
+        expect(res[0]).to.equal('"and that"');
 
         var re = tokens.tokenRegex('uquotestring');
         var res = re.exec('\nthis and that');
@@ -39,17 +39,16 @@ describe('#tokens', function() {
 
         var re = tokens.tokenRegex('chrstring');
         // Should work in all three cases above!
-        var res = re.exec("'this' and that");
+        var res = re.exec("'this and' that");
         expect(res.index).to.equal(0);
-        expect(res[0]).to.equal("'this'");
+        expect(res[0]).to.equal("'this and'");
         re.lastIndex = 0;
-        var res = re.exec('this and "that"');
-        expect(res.index).to.equal(9);
-        expect(res[0]).to.equal('"that"');
-        re.lastIndex = 0;
-        var res = re.exec('\nthis and that');
+        var res = re.exec('this "and that"');
         expect(res.index).to.equal(0);
-        expect(res[0]).to.equal('\nthis');
+        expect(res[0]).to.equal('this');
+        var res = re.exec('this "and that"');
+        expect(res.index).to.equal(5);
+        expect(res[0]).to.equal('"and that"');
     });
     it('should match number types', function() {
         var re = tokens.tokenRegex('integer');
