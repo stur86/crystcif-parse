@@ -8,3 +8,11 @@
 module.exports = function crystCifParse(ciftext) {
     
 }
+
+var fs = require('fs');
+var parseCif = require('./lib/parse.js').parseCif;
+
+fs.readFile(__dirname + '/examples/example_single.cif', 'utf8',
+    function(err, file) {
+        parseCif(file);
+    });  

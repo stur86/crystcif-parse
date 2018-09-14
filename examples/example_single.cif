@@ -21,7 +21,7 @@ _publ_body_contents
 ;
 Introduction
 ; 
-;\
+;
 INTRODUCTION TEXT HERE
 ;
  section Experimental 
