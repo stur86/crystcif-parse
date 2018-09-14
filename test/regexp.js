@@ -111,5 +111,20 @@ describe('#tokens', function() {
         var res = re.exec('loop_\n_this\n_that But not this');
         expect(res.index).to.equal(0);
         expect(res[0]).to.equal('loop_\n_this\n_that');
+
+        var re = tokens.tokenRegex('loop_body');
+        var res = re.exec('loop_\n_this\n_that 0 1 2');
+        expect(res.index).to.equal(18);
+        expect(res[0]).to.equal('0 1 2');
     });
+    it('should match data items', function() {
+        var re = tokens.tokenRegex('data_item');
+        var res = re.exec('_something 10.3E2');
+        expect(res.index).to.equal(0);
+        expect(res[0]).to.equal('_something 10.3E2');        
+        re.lastIndex = 0;
+        var res = re.exec('This is a\nLOOP_\n_a\n_b\n0\n1');
+        expect(res.index).to.equal(10);
+        expect(res[0]).to.equal('LOOP_\n_a\n_b\n0\n1');        
+    })
 });

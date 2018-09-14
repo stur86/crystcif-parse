@@ -22,7 +22,6 @@ describe('#parsing', function() {
     it('should find the correct data blocks', function() {
         var test = "data_block_0\n_item 0\ndata_block_1";
         var blocks = parser.parseDataBlocks(test);
-        console.log(blocks);
         expect(blocks[0][0]).to.equal("block_0");
         expect(blocks[1][0]).to.equal("block_1");
     });
