@@ -43,9 +43,9 @@ describe('#tokens', function() {
         expect(res.index).to.equal(0);
         expect(res[0]).to.equal("'this and'");
         re.lastIndex = 0;
-        var res = re.exec('this "and that"');
+        var res = re.exec(' this "and that"');
         expect(res.index).to.equal(0);
-        expect(res[0]).to.equal('this');
+        expect(res[0]).to.equal(' this');
         var res = re.exec('this "and that"');
         expect(res.index).to.equal(5);
         expect(res[0]).to.equal('"and that"');
@@ -101,9 +101,9 @@ describe('#tokens', function() {
         expect(res.index).to.equal(4);
         expect(res[0]).to.equal('_my_info');
         var re = tokens.tokenRegex('value');
-        var res = re.exec('data_my_info 34.3E2');
+        var res = re.exec('_data_my_info 34.3E2');
         expect(res.index).to.equal(13);
-        expect(res[0]).to.equal('34.3E2');
+        expect(res[0]).to.equal(' 34.3E2');
     });
     it('should match loops', function() {
         var re = tokens.tokenRegex('loop_header');
@@ -113,8 +113,8 @@ describe('#tokens', function() {
 
         var re = tokens.tokenRegex('loop_body');
         var res = re.exec('loop_\n_this\n_that 0 1 2');
-        expect(res.index).to.equal(18);
-        expect(res[0]).to.equal('0 1 2');
+        expect(res.index).to.equal(17);
+        expect(res[0]).to.equal(' 0 1 2');
     });
     it('should match data items', function() {
         var re = tokens.tokenRegex('data_item');

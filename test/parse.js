@@ -25,6 +25,15 @@ describe('#parsing', function() {
         expect(blocks[0][0]).to.equal("block_0");
         expect(blocks[1][0]).to.equal("block_1");
     });
+    it('should correctly split in tokens', function() {
+        var test = " _tag 12 C 'test string' loop_\ndata_block";
+        var tk = parser.tokenize(test);
+        expect(tk[0].val).to.equal("_tag");
+        expect(tk[1].type).to.equal("unknown");
+        expect(tk[3].val).to.equal("'test string'");
+        expect(tk[5].val).to.equal("data_block");
+    });
+    /*
     it('should correctly identify data items', function() {
         var test = "_a 5\n_b 1.2e3\n_c 4.5(34)\n_d 'Word'\n_e ;\nParagraph\n;";
         var items = parser.parseDataItems(test);
@@ -49,5 +58,6 @@ describe('#parsing', function() {
         console.log(items[1].value[1]);
         expect(items[1].value[1].text).to.equal('Test 2');
     })
+    */
 
 });
