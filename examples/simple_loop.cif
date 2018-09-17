@@ -1,0 +1,21 @@
+data_test
+
+loop_
+ _geom_hbond_atom_site_label_D
+ _geom_hbond_atom_site_label_H
+ _geom_hbond_atom_site_label_A
+ _geom_hbond_distance_DH
+ _geom_hbond_distance_HA
+ _geom_hbond_distance_DA
+ _geom_hbond_angle_DHA
+ _geom_hbond_site_symmetry_A
+ _geom_hbond_publ_flag
+#
+# Hydrogen bonding scheme
+# ======== ======= ======
+#
+# D   H    A   D-H   H...A  D...A    D-H...A  symm  publ
+# -   -    -   ---   -----  -----    -------  ----  ----
+ O61  H61  O51 0.86  1.83   2.672(2) 167      2_545 no
+ C2   H2   O51 0.95  2.49   3.309(3) 144      1_656 no
+ C112 H12A O62 0.98  2.46   3.418(4) 165      2_656 no
