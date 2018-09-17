@@ -1,0 +1,6 @@
+data_block
+
+_text_value
+
+; semicolon string
+;

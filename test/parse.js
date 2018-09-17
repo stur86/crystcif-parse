@@ -19,12 +19,6 @@ describe('#parsing', function() {
         var stripped = parser.stripComments(test);
         expect(stripped).to.equal("data_block ")
     });
-    it('should find the correct data blocks', function() {
-        var test = "data_block_0\n_item 0\ndata_block_1";
-        var blocks = parser.parseDataBlocks(test);
-        expect(blocks[0][0]).to.equal("block_0");
-        expect(blocks[1][0]).to.equal("block_1");
-    });
     it('should correctly split in tokens', function() {
         var test = " _tag 12 C 'test string' loop_\ndata_block";
         var tk = parser.tokenize(test);
@@ -32,6 +26,44 @@ describe('#parsing', function() {
         expect(tk[1].type).to.equal("unknown");
         expect(tk[3].val).to.equal("'test string'");
         expect(tk[5].val).to.equal("data_block");
+    });
+    it('should identify the right data blocks', function() {
+        var test = "data_1 _tag value data_2 _tag value _tag value";
+        var tk = parser.tokenize(test);
+        var bl = parser.parseDataBlocks(tk);
+        expect(bl[0][0]).to.equal("1");
+        expect(bl[1][0]).to.equal("2");
+        expect(bl[0][1].length).to.equal(2);
+        expect(bl[0][1][0].type).to.equal('tag');
+        expect(bl[1][1].length).to.equal(4);
+        expect(bl[0][1][1].type).to.equal('unknown');
+    });
+    it('should correctly parse values', function() {
+        var testtok = {
+            'type': 'unknown',
+            'val': '56.4e3(45)'
+        }
+        var val = parser.parseValue(testtok);
+        expect(val.num).to.equal(56400);
+        expect(val.prec).to.equal(45);
+
+        var testtok = {
+            'type': 'unknown',
+            'val': 'thing'
+        }
+        var val = parser.parseValue(testtok);
+        expect(val.type).to.equal('string');
+    });
+    it('should correctly parse a series of data items', function() {
+        var test = '_one 1.0 _fortytwo 42 _string str loop_ _a _b 1 2 3 4';
+        var tk = parser.tokenize(test);
+        var items = parser.parseDataItems(tk);
+        expect(items[0].value.type).to.equal('float');
+        expect(items[1].value.num).to.equal(42);
+        expect(items[2].tag).to.equal('_string');
+        expect(items[3].tag).to.equal('_a');
+        expect(items[3].value[1].num).to.equal(3);
+        expect(items[4].value[0].num).to.equal(2);
     });
     /*
     it('should correctly identify data items', function() {
