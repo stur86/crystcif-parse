@@ -6,11 +6,6 @@ var tokens = require('../lib/tokens.js');
 var parser = require('../lib/parse.js');
 
 describe('#parsing', function() {
-    it('should correctly strip away comments', function() {
-        var test = "# This is a comment \ndata_block # This one too\n";
-        var stripped = parser.stripComments(test);
-        expect(stripped).to.equal("data_block ")
-    });
     it('should correctly split in tokens', function() {
         var test = " _tag 12 C 'test string' loop_\ndata_block";
         var tk = parser.tokenize(test);
