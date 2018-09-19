@@ -41,5 +41,17 @@ describe('#atoms', function() {
         var a = new Atoms([], [], [1, 1, null]);
         expect(a.get_pbc()).to.eql([true, true, false]);
     });
+    it('should compute properly fractional coordinates', function() {
+        var a = new Atoms(['C'], [
+            [0.5, 0.5, 1]
+        ], [
+            [1, 1, 0],
+            [1, -1, 0],
+            [0, 0, 2]
+        ]);
+        expect(a.get_scaled_positions()).to.eql([
+            [0.5, 0, 0.5]
+        ]);
+    })
 
 });

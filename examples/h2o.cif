@@ -1,0 +1,20 @@
+data_image0
+_cell_length_a       0
+_cell_length_b       0
+_cell_length_c       0
+_cell_angle_alpha    90
+_cell_angle_beta     90
+_cell_angle_gamma    90
+
+loop_
+  _atom_site_label
+  _atom_site_occupancy
+  _atom_site_Cartn_x
+  _atom_site_Cartn_y
+  _atom_site_Cartn_z
+  _atom_site_thermal_displace_type
+  _atom_site_B_iso_or_equiv
+  _atom_site_type_symbol
+  O1       1.0000 0.00000  0.00000  0.11926  Biso   1.000  O
+  H1       1.0000 0.00000  0.76324  -0.47705  Biso   1.000  H
+  H2       1.0000 0.00000  -0.76324  -0.47705  Biso   1.000  H
