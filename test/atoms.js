@@ -52,6 +52,29 @@ describe('#atoms', function() {
         expect(a.get_scaled_positions()).to.eql([
             [0.5, 0, 0.5]
         ]);
-    })
+    });
+    it('should handle fractional coordinates as an input', function() {
+        var a = new Atoms(['C'], [
+                [0.5, 0.5, 0.0]
+            ], [
+                [1, 1, 0],
+                [0, 3, 0],
+                [0, 0, 1]
+            ], {},
+            true);
+        expect(a.get_positions()).to.eql([
+            [0.5, 2.0, 0]
+        ]);
+    });
+    it('should throw an error with unknown species only if not tolerant',
+        function() {
+
+            expect(function() {
+                var a = new Atoms(['X']);
+            }).to.throw;
+
+            var a = new Atoms(['X'], [[0, 0, 0]], null, null, false, true);
+
+        });
 
 });
