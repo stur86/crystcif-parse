@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var nm = require('numeric');
 var cryst = require('../lib/cryst.js');
 var utils = require('../lib/utils.js');
+var symm = require('../lib/symmetry.js');
 
 describe('#cell', function() {
     it('should correctly convert from cartesian to axis-and-angles', function() {
@@ -39,5 +40,13 @@ describe('#cell', function() {
             expect(nm.dot(cell[0], adir)).to.be.closeTo(3, 1e-12);
             expect(nm.dot(cell[1], adir)).to.be.closeTo(0.5, 1e-12);
         });
-
+    it('should properly parse symmetry operations', function() {
+        var symop = symm.parseSymOp('x,-y+1/2,z');
+        expect(symop[0]).to.eql([
+            [1, 0, 0],
+            [0, -1, 0],
+            [0, 0, 1]
+        ]);
+        expect(symop[1]).to.eql([0, 0.5, 0]);
+    });
 });
