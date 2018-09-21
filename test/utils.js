@@ -15,4 +15,10 @@ describe('#utils', function() {
         var a = utils.includesAll([1, 2, 3, 4], [1, 5]);
         expect(a).to.be.false;
     });
+    it('should correctly reduce vectors to modulo 1', function() {
+        var v = [1.2, 0.5, -3.4];
+        var u = utils.mod1(v);
+        for (var i = 0; i < 3; ++i)
+            expect(u[i]).to.be.closeTo([0.2, 0.5, 0.6][i], 1e-5);
+    })
 })
