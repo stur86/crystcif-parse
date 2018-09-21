@@ -20,5 +20,20 @@ var Atoms = require('./lib/cryst.js').Atoms;
 fs.readFile(process.argv[2], 'utf8',
     function(err, file) {
         var a = Atoms.readCif(file);
-        console.log(a);
+
+        // Print it out as cell
+        console.log('%block lattice_cart');
+        var c = a.I.get_cell();
+        for (var i = 0; i < 3; ++i) {
+            console.log(c[i].join(' '));
+        }
+        console.log('%endblock lattice_cart');
+        var syms = a.I.get_chemical_symbols();
+        var pos = a.I.get_positions();
+        console.log('%block positions_abs');
+        for (var i = 0; i < a.I.length(); ++i) {
+            console.log(syms[i] + ' ' + pos[i].join(' '));
+        }
+        console.log('%endblock positions_abs');
+
     });

@@ -46,7 +46,7 @@ describe('#atoms', function() {
             [0.5, 0.5, 1]
         ], [
             [1, 1, 0],
-            [1, -1, 0],
+            [2, -2, 0],
             [0, 0, 2]
         ]);
         expect(a.get_scaled_positions()).to.eql([
