@@ -11,7 +11,7 @@ var Atoms = require('./lib/cryst.js').Atoms;
  * @param  {string} ciftext CIF file as a string
  * @return {Object}
  */
-module.exports = function crystCifParse(ciftext) {
+module.exports.parseCifStructures = function(ciftext) {
     return Atoms.readCif(ciftext);
 }
 
