@@ -49,4 +49,13 @@ describe('#cell', function() {
         ]);
         expect(symop[1]).to.eql([0, 0.5, 0]);
     });
+    it('should correctly interpret Hall symbols', function() {
+        var symops = symm.interpretHallSymbol('-P 1');
+        expect(symops[1][0]).to.eql([
+            [-1, 0, 0],
+            [0, -1, 0],
+            [0, 0, -1]
+        ]);
+        expect(symops[1][1]).to.eql([0, 0, 0]);
+    })
 });
