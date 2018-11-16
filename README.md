@@ -9,10 +9,10 @@ interpret some basic keywords in order to retrieve a crystal structure.
 * partial interpretation of structural core dictionary keywords (position, cell
   parameters, labels)
 * basic treatment of symmetry (symmetry operations)
+* spacegroup symbols
 
 ### Not supported yet:
 * CIF 2.0 syntax
-* spacegroup symbols
 * non-essential atomic properties (masses, charges, bonds, etc.)
 
 ## Module contents
