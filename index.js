@@ -1,9 +1,7 @@
 'use strict';
 
 
-var fs = require('fs');
 var parser = require('./lib/parse.js');
-var tokens = require('./lib/tokens.js');
 var Atoms = require('./lib/cryst.js').Atoms;
 
 /**
