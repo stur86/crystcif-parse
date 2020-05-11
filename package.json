@@ -1,6 +1,6 @@
 {
   "name": "crystcif-parse",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A parser for crystallographic CIF files",
   "main": "index.js",
   "scripts": {
