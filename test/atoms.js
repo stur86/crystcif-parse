@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var expect = require('chai').expect;
 var Atoms = require('../lib/cryst.js').Atoms;
 
@@ -73,7 +74,22 @@ describe('#atoms', function() {
                 var a = new Atoms(['X']);
             }).to.throw;
 
-            var a = new Atoms(['X'], [[0, 0, 0]], null, null, false, true);
+            var a = new Atoms(['X'], [
+                [0, 0, 0]
+            ], null, null, false, true);
+
+        });
+    it('should correctly parse a cif file',
+        function() {
+
+            var contents = fs.readFileSync(__dirname +
+                '/../examples/example_single.cif',
+                'utf8');
+
+            var a = Atoms.readCif(contents)['I'];
+
+            expect(a.length()).to.equal(84);
+            expect(a.get_pbc()).to.deep.equal([true, true, true]);
 
         });
 

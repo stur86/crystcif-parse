@@ -1,6 +1,6 @@
 {
   "name": "crystcif-parse",
-  "version": "0.1.5",
+  "version": "0.2",
   "description": "A parser for crystallographic CIF files",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/stur86/crystcif-parse#readme",
   "dependencies": {
-    "numeric": "^1.2.6",
+    "mathjs": "^7.5.0",
     "mendeleev": "^1.2.2"
   },
   "devDependencies": {
