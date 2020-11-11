@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var nm = require('numeric');
+var mjs = require('mathjs');
 var cryst = require('../lib/cryst.js');
 var utils = require('../lib/utils.js');
 var symm = require('../lib/symmetry.js');
@@ -36,9 +36,9 @@ describe('#cell', function() {
             var adir = utils.unit([0.5, -1, 1]);
             var cell = cryst.cellparToCell(abc, abn, adir);
 
-            expect(nm.dot(cell[2], abn)).to.be.closeTo(1, 1e-12);
-            expect(nm.dot(cell[0], adir)).to.be.closeTo(3, 1e-12);
-            expect(nm.dot(cell[1], adir)).to.be.closeTo(0.5, 1e-12);
+            expect(mjs.multiply(cell[2], abn)).to.be.closeTo(1, 1e-12);
+            expect(mjs.multiply(cell[0], adir)).to.be.closeTo(3, 1e-12);
+            expect(mjs.multiply(cell[1], adir)).to.be.closeTo(0.5, 1e-12);
         });
     it('should properly parse symmetry operations', function() {
         var symop = symm.parseSymOp('x,-y+1/2,z');
