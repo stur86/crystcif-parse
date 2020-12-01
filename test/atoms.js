@@ -4,6 +4,7 @@ var fs = require('fs');
 var expect = require('chai').expect;
 var mjs = require('mathjs');
 var Atoms = require('../lib/cryst.js').Atoms;
+var utils = require('../lib/utils.js');
 
 describe('#atoms', function() {
 
@@ -100,7 +101,8 @@ describe('#atoms', function() {
                 '/../examples/test_symop.cif', 
                 'utf8');
 
-            var a = Atoms.readCif(contents)['TESTSYMOP'];
+            var symtol = 1e-3;
+            var a = Atoms.readCif(contents, symtol)['TESTSYMOP'];
 
             var fpos = a.get_scaled_positions();
 
@@ -111,8 +113,8 @@ describe('#atoms', function() {
                     var r = [(p2[0]-p1[0])%1,
                              (p2[1]-p1[1])%1,
                              (p2[2]-p1[2])%1];
-                    r = mjs.norm(r);
-                    expect(r).to.be.above(1e-3);
+                    r = utils.shortestPeriodicLength(r);
+                    expect(r).to.be.above(symtol);
                 }
             }
 

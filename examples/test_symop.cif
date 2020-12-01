@@ -24,4 +24,5 @@ _atom_site_type_symbol
 _atom_site_fract_x
 _atom_site_fract_y
 _atom_site_fract_z
-    H1    H     1.0000    1.0000    0.0000
+    H1    H     0.9999    1.0000    0.0000
+    H1    H     0.0000    1.0000    0.5000

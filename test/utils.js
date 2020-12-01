@@ -20,5 +20,9 @@ describe('#utils', function() {
         var u = utils.mod1(v);
         for (var i = 0; i < 3; ++i)
             expect(u[i]).to.be.closeTo([0.2, 0.5, 0.6][i], 1e-5);
-    })
+    });
+    it('should correctly find the shortest periodic length of a [0,1[^3 vector', function() {
+        var v = [0.3, 0.6, 0.0];
+        expect(utils.shortestPeriodicLength(v)).to.be.closeTo(0.5, 1e-5);
+    });
 })
