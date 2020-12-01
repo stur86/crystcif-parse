@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var expect = require('chai').expect;
+var mjs = require('mathjs');
 var Atoms = require('../lib/cryst.js').Atoms;
 
 describe('#atoms', function() {
@@ -90,6 +91,30 @@ describe('#atoms', function() {
 
             expect(a.length()).to.equal(84);
             expect(a.get_pbc()).to.deep.equal([true, true, true]);
+
+        });
+    it('should not create artefacts when dealing with symmetry operations',
+        function() {
+
+            var contents = fs.readFileSync(__dirname + 
+                '/../examples/test_symop.cif', 
+                'utf8');
+
+            var a = Atoms.readCif(contents)['TESTSYMOP'];
+
+            var fpos = a.get_scaled_positions();
+
+            for (var i = 0; i < fpos.length-1; ++i) {
+                var p1 = fpos[i];
+                for (var j = i+1; j < fpos.length; ++j) {
+                    var p2 = fpos[j];
+                    var r = [(p2[0]-p1[0])%1,
+                             (p2[1]-p1[1])%1,
+                             (p2[2]-p1[2])%1];
+                    r = mjs.norm(r);
+                    expect(r).to.be.above(1e-3);
+                }
+            }
 
         });
 
