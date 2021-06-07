@@ -1,6 +1,5 @@
 'use strict';
 
-
 var parser = require('./lib/parse.js');
 var Atoms = require('./lib/cryst.js').Atoms;
 
