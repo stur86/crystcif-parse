@@ -1,10 +1,14 @@
 'use strict';
 
 var fs = require('fs');
-var expect = require('chai').expect;
+var chai = require('chai');
+var chaiAlmost = require('chai-almost');
 var mjs = require('mathjs');
 var Atoms = require('../lib/cryst.js').Atoms;
 var utils = require('../lib/utils.js');
+
+chai.use(chaiAlmost(1e-6));
+const expect = chai.expect;
 
 describe('#atoms', function() {
 
@@ -118,6 +122,30 @@ describe('#atoms', function() {
                 }
             }
 
+        });
+    it('should correctly interpret various formats of cell', function() {
+
+            // Cubic cell
+            var a = new Atoms(['C'], [[0,0,0]], 2.0);
+            expect(a.get_cell()).to.deep.equal([[2, 0, 0], [0, 2, 0], [0, 0, 2]]);
+
+            // Orthorombic cell
+            a = new Atoms(['C'], [[0,0,0]], [1,2,3]);
+            expect(a.get_cell()).to.deep.equal([[1, 0, 0], [0, 2, 0], [0, 0, 3]]);
+
+            // Cartesian cell
+            a = new Atoms(['C'], [[0,0,0]], [[1,1,0],[0,2,0],[0,1,3]]);
+            expect(a.get_cell()).to.deep.equal([[1,1,0],[0,2,0],[0,1,3]]);
+
+            // Partial periodicity
+            a = new Atoms(['C'], [[0,0,0]], [1,null,1]);
+            expect(a.get_pbc()).to.deep.equal([true, false, true]);
+            expect(a.get_cell()).to.deep.equal([[1, 0, 0], null, [0, 0, 1]]);
+
+            // Axes and angles
+            a = new Atoms(['C'], [[0,0,0]], [[1, Math.sqrt(2), 1], [90, 90, 45]]);
+            expect(a.get_cell()).to.almost.deep.equal([[1,0,0],[1,1,0],[0,0,1]]);
+            
         });
 
 });
