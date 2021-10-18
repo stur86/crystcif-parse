@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/stur86/crystcif-parse#readme",
   "dependencies": {
-    "mathjs": "^7.5.0",
+    "mathjs": "^7.6.0",
     "mendeleev": "^1.2.2"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "chai-almost": "^1.0.1",
     "mocha": "^7.2.0"
   },
