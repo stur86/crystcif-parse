@@ -21,6 +21,9 @@ describe('#parsing', function() {
         expect(tk[1].val).to.equal("0");
         expect(tk[2].val).to.equal("_tag");
         expect(tk[3].val).to.equal("1");
+
+        expect(tk[0].line).to.equal(1);
+        expect(tk[2].line).to.equal(2);
     });
     it('should identify the right data blocks', function() {
         var test = "data_1 _tag value data_2 _tag value _tag value";
@@ -73,5 +76,19 @@ describe('#parsing', function() {
         expect(cifdict.global._publ_body_element.type).to.equal('loop');
         expect(cifdict.I._chemical_formula_moiety.value.text).to.equal(
             'C19 H19 N O3');
+    });
+    it('should throw appropriate errors', function() {
+
+        // Tags with no value
+        var test = '_tag 1\n_tag\n_tag';
+        var tk = parser.tokenize(test);
+        expect(() => { parser.parseDataItems(tk); }).to.throw(
+            'ERROR @ line 2: Invalid or missing value for tag _tag');
+
+        // Bad loop
+        test = 'loop_\n_atom_site_label\n_atom_site_type_symbol\nC';
+        tk = parser.tokenize(test);
+        expect(() => { parser.parseDataItems(tk); }).to.throw(
+            'ERROR @ line 4: Invalid loop - values must be a multiple of tags');
     });
 });
