@@ -14,6 +14,14 @@ describe('#parsing', function() {
         expect(tk[3].val).to.equal("'test string'");
         expect(tk[5].val).to.equal("data_block");
     });
+    it('should correctly deal with Windows-style line endings', function() {
+        var test = "_tag 0\r\n_tag 1"
+        var tk = parser.tokenize(test);
+        expect(tk[0].val).to.equal("_tag");
+        expect(tk[1].val).to.equal("0");
+        expect(tk[2].val).to.equal("_tag");
+        expect(tk[3].val).to.equal("1");
+    });
     it('should identify the right data blocks', function() {
         var test = "data_1 _tag value data_2 _tag value _tag value";
         var tk = parser.tokenize(test);
